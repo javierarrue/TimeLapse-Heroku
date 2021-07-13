@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>TimeLapse <%= tituloWeb %>
+    </title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo/logoweb.png" />
+
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+        integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+    <link rel="stylesheet" href="/css/glightbox.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+</head>
+
+<body>
+    <!-- Start Header Area -->
+    <header class="header">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/">
+                                <h3 class="text-primary">TimeLapse</h3>
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    
+                                    <%if(user){%>
+                                        <% if (user.role === 'client') { %>
+                                            <li class="nav-item header-item"><a href="/" id="inicio">Inicio</a></li>
+                                            <li class="nav-item header-item"><a href="/tienda" id="tienda">Tienda</a></li>
+                                            <li class="nav-item header-item">
+                                                <a href="/carrito" id="carrito">Carrito</a>
+                                                <span id="notification" class="notification d-none"></span>
+                                            </li>
+                                            <li class="nav-item header-item"><a href="/sobreNosotros" id="nosotros">¿Quiénes
+                                                somos?</a></li>
+                                            <li class="nav-item header-item">
+                                                <a class="text-primary font-weight-bold" style="color: #3763EB !important;" href="/perfil"><%= user.name +' '+ user.lastname%></a>
+                                                <ul class="sub-menu">
+                                                    <% if(user.role != "admin") {%>
+                                                        <li><a href="/editarPerfil">Editar Perfil</a></li>
+                                                        <% } %> 
+                                                    <li><a href="/logout">Cerrar Sesión</a></li>
+                                                </ul>
+                                            </li>
+                                        <% } else if (user.role === 'admin') {%>
+                                            <li class="nav-item header-item">
+                                                <a class="text-primary font-weight-bold" style="color: #3763EB !important;" href="/panelControl"><%= user.name +' '+ user.lastname%></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="/logout">Cerrar Sesión</a></li>
+                                                </ul>
+                                            </li>
+                                        <% }%>
+                                    <% } else { %>
+                                        <li class="nav-item header-item"><a href="/" id="inicio">Inicio</a></li>
+                                        <li class="nav-item header-item"><a href="/tienda" id="tienda">Tienda</a></li>
+                                        <li class="nav-item header-item">
+                                            <a href="/carrito" id="carrito">Carrito</a>
+                                            <span id="notification" class="notification d-none"></span>
+                                        </li>
+                                        <li class="nav-item header-item"><a href="/sobreNosotros" id="nosotros">¿Quiénes
+                                            somos?</a></li>
+                                        <li class="nav-item header-item" style="cursor:pointer;">
+                                            <a data-bs-toggle="modal" data-bs-target="#login">
+                                                <span class="text-primary font-weight-bold">Iniciar Sesión</span>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                    <div aria-hidden="true" style="display: none;">
+                                        <div class="radio-mode">
+                                            <input type="radio" id="light">
+                                        </div>
+                                        <div class="radio-mode">
+                                            <input type="radio" id="dark">
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->

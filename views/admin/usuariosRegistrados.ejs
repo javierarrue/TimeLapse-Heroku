@@ -1,0 +1,133 @@
+<%- include('../templates/head', {tituloWeb: '- Panel Control' }) %>
+
+    <!-- Start User Profile Area -->
+    <section class="about-us section">
+        <div class="">
+            <div class="row">
+                <aside class="col-lg-3 col-md-4 col-12 d-flex justify-content-center mb-5">
+                    <div class="sidebar ml-2 border-1 border-right">
+                        <div class="mb-3 text-center">
+                            <img class="rounded-circle border border-2 border-primary"
+                                src="images/profiles/admin.png" alt="" style="width: 200px; height: 200px;">
+                            <p class="mt-4">Hola, <span class="text-primary font-weight-bold">Administrador</span></p>
+                            <small>user@user</small>
+                        </div>
+                        <hr class="w-50 mx-auto">
+                        <div class="widget popular-feeds px-5" style="border-style: none;">
+                            <div class="">
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-columns fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/panelControl">Panel Principal</a></h6>
+                                </div>
+                                <div class="single-popular-feed text-primary">
+                                    <i class="fas fa-users fa-lg d-inline mr-2"></i>
+                                    <h6 class="text-primary"><a href="/usuariosRegistrados">Usuarios Registrados</a>
+                                    </h6>
+                                </div>
+
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-book fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/administrarCursos">Administrar Cursos</a></h6>
+                                </div>
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-dollar-sign fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/ganancias">Ganancias</a></h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="col-lg-9 col-md-8">
+                    <div class="container mt-4">
+                        <div class="about-left mt-4">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay=".4s">Usuarios Registrados: <h2
+                                        class="font-weight-bold font-italic text-primary"><%= usuariosRegistrados.length %></h2>
+                                </h2>
+                                <p class="wow fadeInUp" data-wow-delay=".6s">Aquí podrás visualizar y administrar
+                                    todos los usuarios registrados en el sistema.</p>
+                            </div>
+                        </div>
+                        <% if(mensajeUserEliminado.length !==0){ %>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert" id="deleteUserYes">
+                              <strong><i class="far fa-trash-alt"></i> Eliminacion Exitosa: </strong> <%= mensajeUserEliminado %>
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <% } %>
+                            <% if(mensajeUserNoEliminado.length !==0){ %>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="deleteUserNo">
+                                  <strong><i class="far fa-trash-alt"></i> Error de Eliminacion: </strong> <%= mensajeUserNoEliminado %>
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                <% } %>
+                        <div class="services">
+                            <div class="single-head">
+                                <table class="table table-bordered table-hover border-primary text-center">
+                                    <thead>
+                                        <tr class="table-primary">
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellido</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col" class="table-danger">Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var i=0; i < usuariosRegistrados.length; i++) { %>
+                                        <tr>
+                                            <th scope="row"><%= i+1 %></th>
+                                            <td><%= usuariosRegistrados[i].name %></td>
+                                            <td><%= usuariosRegistrados[i].lastname %></td>
+                                            <td><%= usuariosRegistrados[i].user %></td>
+                                            <td><button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                                    data-target="#modalEliminar" onclick="eliminaUsuario('<%= usuariosRegistrados[i]._id %>')">
+                                                    <i class="fas fa-trash-alt"></i></button></td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    <!-- SCRIPT PARA ASIGNAR EL ID DEL USUARIO A ELIMINAR AL MODAL-->
+    <script>
+        function eliminaUsuario(idUsuario){
+          id=idUsuario;
+          //ASIGNAMOS EL VALOR AL CAMPO idEliminar
+          document.getElementById('idUsuario').value = id;  
+          }
+        </script>
+        <!-- Modal confirmar-->
+        <form action="/usuariosRegistrados/eliminarUsuario" method="GET" >
+        <div class="modal fade" id="modalEliminar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalToggleLabel">Eliminar Usuario</h5>
+                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea eliminar a este usuario?
+                        <input id="idUsuario" name="idUsuario" hidden>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+        <!-- Final Modal confirmar-->
+    </section>
+    <!-- /End User Profile Area -->
+    
+    <%- include('../templates/footer') %>

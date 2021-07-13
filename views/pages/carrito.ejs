@@ -1,0 +1,72 @@
+<%- include('../templates/head', {tituloWeb: '- Carrito de compra'}) %>
+<section class="services section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title align-left">
+                    <span class=" wow fadeInDown" data-wow-delay=".2s">Carrito</span>
+                    <h2 class="wow fadeInUp" data-wow-delay=".4s">Tu Carrito de compra</h2>
+                </div>
+            </div>
+        </div>
+
+        <form action="/pay" method="POST">
+            <div class="row cartShop">
+                    <div class="col-lg-4 col-md-4 wow fadeInDown mb-5 mr-5" data-wow-delay=".4s" style="border-right: 3px solid #3764ebd7;">
+                        <h4 class="text-center wow fadeInDown" data-wow-delay=".4s">Productos</h4>
+                        <div id="items" class="wow fadeInDown" data-wow-delay=".4s">
+                        </div>
+                        <div id="toPay" class="wow fadeInDown" data-wow-delay=".4s"></div>
+                    </div>
+
+                <div class="col-lg-7 col-md-7">
+                    <div class="wow fadeInRight" data-wow-delay=".5s">
+                        <h3 class="mb-3 text-center">Pago</h3>
+                        <div class="col-lg-12">
+                            <form>
+                                <div class="mb-4">
+                                    <label class="form-label mb-4">Introduzca su dirección de correo electrónico. Esta dirección se utilizará para enviarle actualizaciones del estado de sus pedidos.</label>
+                                    <input type="email" class="form-control" placeholder="Su dirección de correo electrónico">
+                                </div>
+                                <div class="mb-1 form-check">
+                                    <input type="checkbox" class="form-check-input" required>
+                                    <label class="form-check-label" for="exampleCheck1">Estoy de acuerdo con los 
+                                        <a href="/politicaPrivacidad" class="font-weight-bold" style="color: #3763EB !important;">Terminos y condiciones</a>
+                                    </label>
+                                </div>
+                                <div class="mb-4 form-check">
+                                    <input type="checkbox" class="form-check-input">
+                                    <label class="form-check-label" for="exampleCheck1"> Manténganme informado de las novedades y ofertas exclusivas</label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <%if(user){%>
+                                            <div class="button">
+                                                <button value="Buy" type="submit" onclick="" class="btn btn-add" style="padding: 18px 80px;">Pagar</button>
+                                            </div>
+                                        <% }else{ %>
+                                            <h5>Debes iniciar sesión para pagar</h5>
+                                            <small>cha estoy bien cansao' de programar lco</small>
+                                        <% } %>
+                                        
+                                    </div>
+                                    <div class="col-lg-8 d-flex align-items-center">
+                                        <i class="fas fa-lock mr-1"></i>
+                                        <p class="d-inline">Todos los datos se manejan de forma cifrada y segura.</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+</section>
+<script>
+    var element = document.getElementById('carrito');
+    element.classList.add('active');
+</script>
+<script src="/js/personal-js/cart.js"></script>
+<%- include('../templates/footer') %>

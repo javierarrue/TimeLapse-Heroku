@@ -1,0 +1,380 @@
+<%- include('../templates/head', {tituloWeb: '- Panel Control' }) %>
+  <!-- Start User Profile Area -->
+  <section class="about-us section">
+    <div class="">
+      <div class="row">
+        <aside class="col-lg-3 col-md-4 col-12 d-flex justify-content-center mb-5">
+          <div class="sidebar ml-2 border-1 border-right">
+            <div class="mb-3 text-center">
+              <img class="rounded-circle border border-2 border-primary" src="images/profiles/admin.png" alt=""
+                style="width: 200px; height: 200px;">
+              <p class="mt-4">Hola, <span class="text-primary font-weight-bold">Administrador</span></p>
+              <small>user@user</small>
+            </div>
+            <hr class="w-50 mx-auto">
+            <div class="widget popular-feeds px-5" style="border-style: none;">
+              <div class="">
+                <div class="single-popular-feed">
+                  <i class="fas fa-columns fa-lg d-inline mr-2"></i>
+                  <h6 class=""><a href="/panelControl">Panel Principal</a></h6>
+                </div>
+                <div class="single-popular-feed">
+                  <i class="fas fa-users fa-lg d-inline mr-2"></i>
+                  <h6 class=""><a href="/usuariosRegistrados">Usuarios Registrados</a></h6>
+                </div>
+
+                <div class="single-popular-feed text-primary">
+                  <i class="fas fa-book fa-lg d-inline mr-2"></i>
+                  <h6 class="text-primary"><a href="/administrarCursos">Administrar Cursos</a></h6>
+                </div>
+                <div class="single-popular-feed">
+                  <i class="fas fa-dollar-sign fa-lg d-inline mr-2"></i>
+                  <h6 class=""><a href="/ganancias">Ganancias</a></h6>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </aside>
+        <div class="col-lg-9 col-md-8">
+          <div class="container mt-4">
+            <div class="about-left mt-4">
+              <div class="section-title">
+                <h2 class="wow fadeInUp" data-wow-delay=".4s">Cantidad de cursos: <h2
+                    class="font-weight-bold font-italic wow fadeInUp text-primary" data-wow-delay=".2s"><%= administrarCursos.length %></h2><!--Mostramos la cantidad de cursos-->
+                </h2>
+                <p class="wow fadeInUp" data-wow-delay=".6s">Aquí podras administrar los cursos</p>
+              </div>
+            </div>
+
+            <!-- MENSAJES DE RETROALIMENTACION -->
+            <% if(mensajeEditado.length !==0){ %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="updateYes">
+              <strong><i class="fas fa-edit"></i> Actualizacion Exitosa: </strong> <%= mensajeEditado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+            <% if(mensajeNoEditado.length !==0){ %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="updateNo">
+              <strong><i class="fas fa-exclamation-triangle"></i> Error al actualizar el curso: </strong> <%= mensajeNoEditado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+            <% if(mensajeAgregado.length !==0){ %>
+            <div class="alert alert-primary alert-dismissible fade show" role="alert" id="addYes">
+              <strong><i class="fas fa-plus-circle"></i> Curso Agregado: </strong> <%= mensajeAgregado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+            <% if(mensajeNoAgregado.length !==0){ %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="addNo">
+              <strong><i class="fas fa-exclamation-triangle"></i> Error al agregar el curso: </strong> <%= mensajeNoAgregado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+            <% if(mensajeEliminado.length !==0){ %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="deleteYes">
+              <strong><i class="far fa-trash-alt"></i> Curso Eliminado: </strong> <%= mensajeEliminado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+            <% if(mensajeNoEliminado.length !==0){ %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="deleteNo">
+              <strong><i class="fas fa-exclamation-triangle"></i> Error al eliminar el curso: </strong> <%= mensajeNoEliminado %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <% } %>
+
+            <!-- FIN DE MENSAJES DE RETROALIMENTACION -->
+            <div class="services">
+              <div class="single-head">
+                <div class="d-grid gap-2 d-md-block mb-4">
+                  <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#modalAgregar">
+                    <i class="fas fa-plus-circle"></i> Agregar un Curso</button>
+                </div>
+
+                <table class="table table-bordered  border-primary text-center">
+                  <thead>
+                    <tr class="table-primary">
+                      <th scope="col">#</th>
+                      <th scope="col">Logo</th>
+                      <th scope="col">Curso</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col" class="table-success">Editar</th>
+                      <th scope="col" class="table-danger">Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i < administrarCursos.length; i++) { %>
+                    <tr>
+                      <th scope="row"><%= i+1 %></th> <!-- PARA QUE EL NUMERO NO COMIENZE MOSTRANDOSE EN CERO-->
+                        <td><img src="images/products/<%= administrarCursos[i].logo %>" style="width: 50px; height: 50px;"></td>
+                      <td><%= administrarCursos[i].name %></td>
+                      <td>$ <%= administrarCursos[i].price %></td>
+                      <td>
+                        <a>
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalEditar"onclick="enviarDatos('<%= JSON.stringify(administrarCursos[i]) %>');">
+                          <i class="far fa-edit"></i></button>
+                        </td>
+                      </a>
+                      <td>
+                      <a>
+                        <button type="button" class="btn btn-outline-danger"  data-toggle="modal" onclick="eliminaEvento('<%= administrarCursos[i]._id %>')" data-target="#modalEliminar">
+                          <i class="far fa-trash-alt"></i></button>
+                      </a> 
+                      </td>
+                    </tr>
+                    <% } %>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SCRIPT PARA ASIGNAR EL ID A ELIMINAR AL MODAL-->
+    <script>
+      function eliminaEvento(idEliminar){
+        id=idEliminar;
+        //ASIGNAMOS EL VALOR AL CAMPO idEliminar
+        document.getElementById('idEliminar').value = id;  
+        }
+      </script>
+    <!-- Modal Eliminar-->
+    <form action="/administrarCursos/eliminar" method="get">
+    <div class="modal fade" id="modalEliminar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalToggleLabel">Eliminar curso</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Está seguro de que desea eliminar este curso?
+            <input id="idEliminar" name="idEliminar" hidden>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+    <!-- Final Modal eliminar-->
+
+
+
+
+
+    <!-- Modal Agregar cursoooo -->
+      <div class="modal fade" id="modalAgregar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-xl" >
+          <div class="modal-content">
+            <div class="modal-header bg-primary">   
+              <h5 class="modal-title text-white" id="exampleModalToggleLabel"><i class="fas fa-plus-circle"></i> Agregar curso</h5>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>   
+            
+            <div class="modal-body">
+              <form method="POST" action="/administrarCursos/agregar" enctype="multipart/form-data">
+                <div class="row align-items-center">
+                  <div class="col-lg-6 col-s-15">
+                    <label class="form-label">
+                      <b><i class="fas fa-image"></i> Logo del curso:</b>
+                    </label>    
+              <div class="input-group mb-2">
+                <input class="form-control" type="file" id="logo" name="logo" accept="image/png, image/jpeg, image/jpg" required>           
+                <img src="https://image.flaticon.com/icons/png/512/16/16410.png" width="70px" height="70px" id="preview">
+              </div>
+                    <div class="col-13">
+                      <label class="form-label">
+                        <b><i class="fas fa-book"></i> Curso:</b>
+                      </label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre del curso" id="name" name="name" required>
+                        
+                      </div>
+                    </div>  
+                    <div class="row">
+                    <div class="col-6">
+                      <label class="form-label">
+                        <b><i class="fas fa-dollar-sign"></i> Precio:</b>
+                      </label>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" placeholder="Precio" aria-label="Apellido" id="price" name="price" step="0.01" required>
+                      </div>
+                    </div> 
+                    <div class="col-6">
+                      <label class="form-label">
+                        <b><i class="fas fa-list"></i> Categoria:</b>
+                      </label>
+                    <select class="form-select" aria-label="Default select example" name="category" id="category">
+                      <option value="ofimatica">Ofimatica</option>
+                      <option value="redes sociales">Redes Sociales</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-13">
+                  <label class="form-label">
+                    <b><i class="fas fa-align-center"></i> Contenido:</b>
+                  </label>
+                  <div class="input-group mb-3">
+                    <textarea cols="57" rows=5 type="text" class="form-control" placeholder="Contenido del curso" id="content" name="content" required></textarea>
+                  </div>
+                </div>
+                </div>
+                <div class="col-lg-6 col-s-6">
+  
+                  <div class="col-13">
+                    <label class="form-label">
+                      <b><i class="fas fa-thumbs-up"></i> Beneficios:</b>
+                    </label>
+                    <div class="input-group mb-3">
+                      <textarea cols="57" rows=5 type="text" class="form-control" placeholder="Beneficios del curso" id="benefits" name="benefits" required></textarea>
+                    </div>
+                  </div>  
+                <div class="col-12">
+                  <label class="form-label">
+                    <br>
+                    <b><i class="fas fa-comment-alt"></i> Descripcion:</b>
+                  </label>
+                  <div class="input-group mb-3">
+                    <textarea type="text" class="form-control" placeholder="Describa" cols="57" rows=7 id="description" name="description" required></textarea>
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Agregar Curso</button>
+              </div>     
+              </form>         
+            </div>
+  
+          </div>
+        </div>
+      </div>
+      <!-- Final Modal agregar curso-->
+
+
+
+        <script>
+        //SCRIPT PARA EDITAR UN CURSO
+        function enviarDatos(cursoSelect){                   
+                    //TRANSFORMAMOS LA CADENA QUE LLEGA DESDE EL HTML EN UN JSON, YA QUE HTML NO PUEDE ENVIAR ARCHIVOS JSON
+                    curso=JSON.parse(cursoSelect);
+
+                    //console.log("IMAGEN SELECCIONADO==========="+curso.logo);
+                    document.getElementById('idEditar').value = curso._id; 
+                    document.getElementById('nameEditar').value = curso.name; 
+                    document.getElementById('priceEditar').value = curso.price.$numberDecimal;
+                    document.getElementById('contentEditar').value = curso.content; 
+                    document.getElementById('benefitsEditar').value = curso.benefits; 
+                    document.getElementById('categoryEditar').value = curso.category; 
+                    document.getElementById('descriptionEditar').value = curso.description;                   
+                }
+        </script>
+
+    <!-- Modal editar-->
+
+    <form method="POST" action="/administrarCursos/editar" enctype="multipart/form-data">
+    <div class="modal fade" id="modalEditar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1">
+      <div class="modal-dialog modal-xl" >
+        <div class="modal-content">
+          <div class="modal-header bg-success">   
+            <h5 class="modal-title text-white" id="exampleModalToggleLabel"><i class="fas fa-edit"></i> Editar curso</h5>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row align-items-center">
+              <div class="col-lg-6 col-s-15">
+                <input id="idEditar" name="idEditar" hidden>       
+                  <label class="form-label">
+                    <b><i class="fas fa-image"></i> Logo del curso:</b>
+                  </label>
+                  <div class="input-group mb-2">
+                    <input type="file" class="form-control" id="logoEditar" name="logoEditar" accept="image/png, image/jpeg, image/jpg">
+                    <img src="https://image.flaticon.com/icons/png/512/16/16410.png" width="70px" height="70px" id="previewEdit">
+                  </div>
+                  <div class="col-13">
+                    <label class="form-label">
+                      <b><i class="fas fa-book"></i> Curso:</b>
+                    </label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Nombre del curso" id="nameEditar" name="name" required>
+                    </div>
+                  </div>  
+                  <div class="row">
+                  <div class="col-6">
+                    <label class="form-label">
+                      <b><i class="fas fa-dollar-sign"></i> Precio:</b>
+                    </label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">$</span>
+                      <input type="number" class="form-control" placeholder="Precio" aria-label="Apellido" id="priceEditar" name="price" step="0.01" required>
+                    </div>
+                  </div> 
+                  <div class="col-6">
+                    <label class="form-label">
+                      <b><i class="fas fa-list"></i> Categoria:</b>
+                    </label>
+                  <select class="form-select" aria-label="Default select example" name="category" id="categoryEditar">
+                    <option value="ofimatica">Ofimatica</option>
+                    <option value="redes sociales">Redes Sociales</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-13">
+                <label class="form-label">
+                  <b><i class="fas fa-align-center"></i> Contenido:</b>
+                </label>
+                <div class="input-group mb-3">
+                  <textarea type="text" class="form-control" cols="57" rows=5 placeholder="Contenido del curso" id="contentEditar" name="content" required></textarea>
+                </div>
+              </div>
+              </div>
+              <div class="col-lg-6 col-s-6">
+
+                <div class="col-13">
+                  <label class="form-label">
+                    <b><i class="fas fa-thumbs-up"></i> Beneficios:</b>
+                  </label>
+                  <div class="input-group mb-3">
+                    <textarea type="text" class="form-control" cols="57" rows=5 placeholder="Beneficios del curso" id="benefitsEditar" name="benefits" required></textarea>
+                  </div>
+                </div>  
+              <div class="col-12">
+                <label class="form-label">
+                  <br>
+                  <b><i class="fas fa-comment-alt"></i> Descripcion:</b>
+                </label>
+                <div class="input-group mb-3">
+                  <textarea type="text" class="form-control" placeholder="Describa" cols="57" rows=7 id="descriptionEditar" name="description" required></textarea>
+                </div>
+              </div>
+              </div>           
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success" >Guardar Cambios</button>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </form> 
+    <!-- Final Modal editar-->
+
+
+
+
+  </section>
+  <!-- /End User Profile Area -->
+  
+  <%- include('../templates/footer') %>

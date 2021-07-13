@@ -1,0 +1,79 @@
+<%- include('../templates/head', {tituloWeb: '- Panel Control' }) %>
+
+    <!-- Start User Profile Area -->
+    <section class="about-us section">
+        <div class="">
+            <div class="row">
+                <aside class="col-lg-3 col-md-4 col-12 d-flex justify-content-center mb-5">
+                    <div class="sidebar ml-2 border-1 border-right">
+                        <div class="mb-3 text-center">
+                            <img class="rounded-circle border border-2 border-primary"
+                                src="images/profiles/admin.png" alt="" style="width: 200px; height: 200px;">
+                            <p class="mt-4">Hola, <span class="text-primary font-weight-bold">Administrador</span></p>
+                            <small>user@user</small>
+                        </div>
+                        <hr class="w-50 mx-auto">
+                        <div class="widget popular-feeds px-5" style="border-style: none;">
+                            <div class="">
+                                <div class="single-popular-feed text-primary" id="panelPrincipal-icon">
+                                    <i class="fas fa-columns fa-lg d-inline mr-2"></i>
+                                    <h6 class="text-primary" id="panelPrincipal"><a href="/panelControl">Panel
+                                            Principal</a></h6>
+                                </div>
+                                <div class="single-popular-feed" id="usuarios-icon">
+                                    <i class="fas fa-users fa-lg d-inline mr-2"></i>
+                                    <h6 class="" id="usuarios"><a href="/usuariosRegistrados">Usuarios Registrados</a>
+                                    </h6>
+                                </div>
+                                <div class="single-popular-feed" id="cursos-icon">
+                                    <i class="fas fa-book fa-lg d-inline mr-2"></i>
+                                    <h6 class="" id="cursos"><a href="/administrarCursos">Administrar Cursos</a></h6>
+                                </div>
+                                <div class="single-popular-feed" id="ganancias-icon">
+                                    <i class="fas fa-dollar-sign fa-lg d-inline mr-2"></i>
+                                    <h6 class="" id="ganancias"><a href="/ganancias">Ganancias</a></h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="col-lg-9 col-md-8">
+                    <div class="container mt-4">
+                        <div class="about-left mt-4">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay=".4s">Cursos Disponibles</h2>
+                                <p class="wow fadeInUp" data-wow-delay=".6s">Aquí se muestran todos los cursos que tiene
+                                    la plataforma
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="services">
+                            <div class="single-head">
+                                <div class="single-head">
+                                    <div class="row">
+                                        <% for(var i=0; i < panelPrincipal.length; i++) { %>
+                                        <div class="col-lg-3 col-md-6 col-12 mb-5">
+                                            <div class="single-service wow fadeInUp" data-wow-delay=".2s">
+                                                <h3 class="text-center"><a><%= panelPrincipal[i].name %></a></h3>
+                                                <div class="col text-center">
+                                                    <a href="/tienda/<%= panelPrincipal[i].name %> "><img src="images/products/<%= panelPrincipal[i].logo %>" alt="#" height="60px" width="60px"></a>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <% } %>  
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+    </section>
+    <!-- /End User Profile Area -->
+    
+    <%- include('../templates/footer') %>

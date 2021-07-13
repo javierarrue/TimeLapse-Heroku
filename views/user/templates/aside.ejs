@@ -1,0 +1,44 @@
+<aside class="col-lg-3 col-md-4 col-12 d-flex justify-content-center mb-5">
+    <div class="sidebar ml-2 border-1 border-right">
+        <div class="mb-3 text-center">
+            <div class="image-profile">
+                <%if(user){%>
+                    <img class="profile" id="foto" src="images/profiles/<%= user.profile %> " alt="">
+                <% }else{ %>
+                    <img class="profile" src="images/profiles/profile-default.png" alt="">
+                <% } %>
+            </div>
+            <p class="mt-4">Hola, <span class="text-primary font-weight-bold">
+                <%if(user){%>
+                    <%= user.name +' '+ user.lastname%>
+                <% } %>
+            </span>
+            </p>
+
+            <small>Usuario: 
+                <%if(user){%>
+                    <%= user.user%>
+                <% } %>
+            </small>
+        </div>
+        <hr class="w-50 mx-auto">
+        <div class="widget popular-feeds px-5" style="border-style: none;">
+            <h5 class="widget-title text-primary">Esta es tu sección</h5>
+            <div class="">
+                <div class="single-popular-feed">
+                    <i class="far fa-folder-open fa-lg d-inline mr-2"></i>
+                    <h6 class=""><a href="/perfil">Mis Cursos</a></h6>
+                </div>
+
+                <div class="single-popular-feed">
+                    <i class="fas fa-battery-three-quarters fa-lg d-inline mr-2"></i>
+                    <h6 class=""><a href="/miProgreso">Mi Progreso</a></h6>
+                </div>
+                <div class="single-popular-feed">
+                    <i class="far fa-chart-bar fa-lg d-inline mr-2 font"></i>
+                    <h6 class=""><a href="/editarPerfil">Editar Cuenta</a></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

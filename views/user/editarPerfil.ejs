@@ -1,0 +1,161 @@
+<%- include('../templates/head', {tituloWeb: '- Editar Perfil' }) %>
+
+    <!-- Start User Profile Area -->
+    <section class="about-us section">
+        <div class="">
+            <div class="row">
+                
+                <%- include('templates/aside') %>
+
+                <div class="col-lg-9 col-md-8">
+                    <div class="container mt-4">
+                        <div class="about-left mt-4">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay=".4s">Editar Perfil</h2>
+                                <p class="wow fadeInUp" data-wow-delay=".6s">Modifica el aspecto de tu perfil.<i
+                                        class="far fa-smile-beam"></i></p>
+                            </div>
+                        </div>
+
+                        <div class="container mt-5">
+                            <%if(user){%>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-6 wow fadeInLeft" data-wow-delay=".4s">
+                                        <form action="/editarFoto/<%= user.id %>" method="POST" enctype="multipart/form-data">                
+                                            <div class="image-profile">                                                
+                                                <img class="profile" id="fotoPerfil" src="images/profiles/<%= user.profile %>" alt="">          
+                                                <input type="file" id="photo" name="profile" accept="image/png, image/jpeg, image/jpg" hidden required>
+                                                <label for="photo" class="overlay-profile"><i class="fas fa-camera fa-2x mt-1"></i></label>                                                  
+                                            </div>
+                                            <button type="submit" class="btn btn-primary wow fadeInUp mx-auto d-block mt-3" data-wow-delay=".4s">Guardar</button> 
+                                        </form>  
+                                    </div>
+                                </div>
+
+                                <hr class="w-50 d-flex mx-auto my-5">
+                                
+                                <form action="/editarPerfil/<%= user.id %> " method="POST">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay=".4s">
+                                            <div class="mb-5">
+                                                <h5 class="mb-2">Tu nombre:</h5>
+                                                <input type="text" class="form-control mb-1" name="name" value="<%= user.name %>">
+                                                <small class="text-muted">Este campo hace referencia al tu nombre y se ve reflejado en la información de tu cuenta.</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 wow fadeInRight" data-wow-delay=".4s">
+                                            <div class="mb-5">
+                                                <h5 class="mb-2">Tu apellido:</h5>
+                                                <input type="text" class="form-control mb-1" name="lastname" value="<%= user.lastname %>">
+                                                <small class="text-muted">Este campo hace referencia al tu apellido y se ve reflejado en la información de tu cuenta.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary wow fadeInUp" data-wow-delay=".4s">Guardar</button>
+                                </form>
+                            <% } %>
+                            
+                            <hr class="w-50 d-flex mx-auto my-5">
+
+                            <div class="wow fadeInLeft" data-wow-delay=".4s">
+                                <h5 class="mr-2 d-inline">Apariencia</h5><i class="fas fa-adjust"></i>
+                                <div class="mb-4">
+                                    <small class="text-muted">Aquí podrás elegir el color ambiente de tu app.</small>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="radio-mode">
+                                            <label class="custom-radio" for="light">
+                                                <input type="radio" name="radio" id="light-mode">
+                                                <span class="radio-btn" style="background: #f0f0f0;"><i class="fas fa-check"></i>
+                                                <div class="mode-icon">
+                                                    <i class="fas fa-sun"></i>
+                                                    <h6 style="color: #000 !important;">Modo light</h6>
+                                                </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="radio-mode">
+                                            <label class="custom-radio" for="dark">
+                                                <input type="radio" name="radio" id="dark-mode">
+                                                <span class="radio-btn" style="background: #3a3a3a;"><i class="fas fa-check"></i>
+                                                <div class="mode-icon">
+                                                    <i class="fas fa-moon text-warning"></i>
+                                                    <h6 class="text-white">Modo Oscuro</h6>
+                                                </div>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="w-50 d-flex mx-auto my-5">
+
+                            <div class="accordion" id="accordionExample">
+                                <div class="wow fadeInUp" data-wow-delay=".4s">
+                                  <div id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;">
+                                    <h5 class="d-inline mr-2" >Cambiar contraseña</h5><i class="far fa-edit"></i>
+                                  </div>
+                                  <%if(user){%>
+                                     
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <form action="/editarContrasena/<%= user.id %>" method="POST" id="formPassword">
+                                            <div class="col-lg-6 col-md-12 mt-3">
+                                                <div class="mb-4">
+                                                    <input type="password" class="form-control" id="password1" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-12">
+                                                <div class="mb-4">
+                                                    <h5 class="mb-3">Confirmar contraseña:</h5>
+                                                    <input type="password" class="form-control" id="password2" name="password2">
+                                                    <small id="messagePass" class="d-flex justify-content-end text-danger"></small>
+                                                </div>
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                        </form>
+                                    </div>
+
+                                <% } %>
+                                </div>    
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- /End User Profile Area -->
+    <script>
+        const i = document.querySelectorAll('i');
+        const h6 = document.querySelectorAll('h6');
+
+        i[2].classList.add('text-primary');
+        h6[2].classList.add('text-primary');
+    </script>
+
+        <script>
+        function readImage (input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#foto').attr('src', e.target.result); // Renderizamos la imagen
+            }
+            reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#profile-image").change(function () {
+            // Código a ejecutar cuando se detecta un cambio de archivO
+            readImage(this);
+        });
+        </script>
+
+    <%- include('../templates/footer') %>

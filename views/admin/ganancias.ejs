@@ -1,0 +1,208 @@
+<%- include('../templates/head', {tituloWeb: '- Panel Control' }) %>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>-->
+    <!-- Start User Profile Area -->
+    <section class="about-us section">
+        <div class="">
+            <div class="row">
+                <aside class="col-lg-3 col-md-4 col-12 d-flex justify-content-center mb-5">
+                    <div class="sidebar ml-2 border-1 border-right">
+                        <div class="mb-3 text-center">
+                            <img class="rounded-circle border border-2 border-primary" src="images/profiles/admin.png"
+                                alt="" style="width: 200px; height: 200px;">
+                            <p class="mt-4">Hola, <span class="text-primary font-weight-bold">Administrador</span></p>
+                            <small>user@user</small>
+                        </div>
+                        <hr class="w-50 mx-auto">
+                        <div class="widget popular-feeds px-5" style="border-style: none;">
+                            <div class="">
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-columns fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/panelControl">Panel Principal</a></h6>
+                                </div>
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-users fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/usuariosRegistrados">Usuarios Registrados</a></h6>
+                                </div>
+
+                                <div class="single-popular-feed">
+                                    <i class="fas fa-book fa-lg d-inline mr-2"></i>
+                                    <h6 class=""><a href="/administrarCursos">Administrar Cursos</a></h6>
+                                </div>
+                                <div class="single-popular-feed text-primary">
+                                    <i class="fas fa-dollar-sign fa-lg d-inline mr-2"></i>
+                                    <h6 class="text-primary"><a href="/ganancias">Ganancias</a></h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="col-lg-9 col-md-8">
+                    <div class="container mt-4">
+                        <div class="about-left mt-4">
+                            <div class="section-title">
+                                <h2 class="wow fadeInUp" data-wow-delay=".4s">Ganancias</h2>
+                                <p class="wow fadeInUp" data-wow-delay=".6s">Observa las ganancias de TimeLapse</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 mb-5">
+                                <div class="own-card wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="row">
+                                        <div class="col-2 text-right">
+                                            <i class="fas fa-clipboard-check fa-lg d-inline"
+                                                style="font-size: 30px;"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="inline-block">
+                                                <% /*Recibo el objeto stats, accedo al primero elemento y luego muestro
+                                                    el total de ventas. */%>
+                                                    <%= stats[0].toObject().total_sales%>
+                                            </h4>
+                                            <h5 class="inline-block">Ventas totales</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 mb-5">
+                                <div class="own-card wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="row">
+                                        <div class="col-2 text-right">
+                                            <i class="fas fa-dollar-sign fa-lg d-inline" style="font-size: 30px;"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4>
+                                                <% /*Recibo el objeto stats, accedo al primero elemento y luego muestro
+                                                    el total de ingresos.*/ %>
+                                                    <%=stats[0].toObject().total_earnings%>
+                                            </h4>
+                                            <h5>Ingresos totales</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12 mb-5">
+                                <div class="own-card wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="row">
+                                        <div class="col-2 text-right">
+                                            <i class="fas fa-book fa-lg d-inline " style="font-size: 30px;"></i>
+                                        </div>
+                                        <div class="col-10">
+                                            <h4 class="inline-block">
+                                                <% /*Recibo el objeto stats, accedo al primero elemento y luego muestro
+                                                    el total de productos vendidos. */%>
+                                                    <%=stats[0].toObject().total_sold_products%>
+                                            </h4>
+                                            <h5 class="inline-block">Cursos vendidos</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---------- GRAFICAS ------------->
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="text-center">Ventas mensuales del <%=(new Date()).getFullYear() %>
+                                </h6>
+                                <!-- <img class="service-patern wow fadeInLeft" data-wow-delay=".5s"
+                                    src="images/service/service-patern.png" alt="#"> -->
+                                <canvas id="ventasPorMes" width="80vh" height="20vh"></canvas>
+                            </div>
+
+                            <div class="col-12 mt-5">
+                                <h6 class="text-center">Ventas por productos</h6>
+                                <canvas id="ventasProductos" width="80vh" height="20vh"></canvas>
+                            </div>
+
+                        </div>
+
+                        <!---------- ./GRAFICAS ------------->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    <% //Arreglo para mostrar en la grafica -Ventas mensuales del año actual - 
+        var salesperMonth = []
+        sales_per_month.forEach(element=> {
+        salesperMonth.push(element)
+        });
+
+        //Almacenando nombre de los productos
+        var pNames = []
+        sales_by_product.forEach(element => {
+            pNames.push(element.name)
+        });
+        //Almacenando ventas por producto
+        var pSales = []
+        sales_by_product.forEach(element => {
+            pSales.push(element.count)
+        });
+
+        %>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            var ctx = document.getElementById('ventasPorMes').getContext('2d');
+            var ventasPorMes = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
+                        'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    datasets: [{
+                        label: 'Ventas',
+                        data: <%-JSON.stringify(salesperMonth) %>,
+                        borderColor: 'rgb(13, 107, 247)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+           var canvas = document.getElementById('ventasProductos').getContext('2d');
+            var ventasProductos = new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: <%-JSON.stringify(pNames) %>,
+                        datasets: [{
+                            label: 'Cantidad de ventas',
+                            data:  <%-JSON.stringify(pSales) %>,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.5)',
+                                    'rgba(54, 162, 235, 0.5)',
+                                    'rgba(255, 206, 86, 0.5)',
+                                    'rgba(153, 102, 255, 0.2)'
+                                ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgb(153, 102, 255)',
+                            ],
+                            borderWidth: 1
+                        }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+        </script>
+
+        <%- include('../templates/footer') %>

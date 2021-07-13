@@ -1,0 +1,189 @@
+<%- include('../templates/head', {tituloWeb: '- Pago'}) %>
+
+    <!-- Start Service Area -->
+    <section class="services section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title align-left">
+                        <h2>Confirmar pedido</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">Proporciona los datos soliticitados para realizar
+                            el pedido de tus cursos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- RESUMEN DE COMPRA -->
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Resumen de compra</h5>
+                            <br>
+                            <div class="row align-items-center">
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <img src="assets/images/products/logo-whatsapp.png" alt="#" style="height:40px;">
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-6">
+                                    <h6 class="product-name">Curso de
+                                        WhatsApp
+                                    </h6>
+                                    <p class="product-des">
+                                        <span><em>Precio:</em> 6.99</span>
+                                        <span><em>Categoria:</em> Social</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row align-items-center">
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <img src="assets/images/products/logo-teams.png" alt="#" style="height:40px;">
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-6">
+                                    <h6 class="product-name">Curso de Microsoft Teams
+                                    </h6>
+                                    <p class="product-des">
+                                        <span><em>Precio:</em> 6.99</span>
+                                        <span><em>Categoria:</em> Colaborativo</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row align-items-center">
+                                <div class="col-lg-2 col-md-4 col-6">
+                                    <img src="assets/images/products/logo-zoom.png" alt="#" style="height:40px;">
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-6">
+                                    <h6 class="product-name">Curso de
+                                        Zoom
+                                    </h6>
+                                    <p class="product-des">
+                                        <span><em>Precio:</em> 6.99</span>
+                                        <span><em>Categoria:</em> Colaborativo</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <br>
+                                <p class="card-text">
+                                <h6>Sub Total: $20.97</h6>
+                                <hr>
+                                <h6>Total neto: $20.97</h6>
+                                </p>
+                                <br>
+                                <div class="button wow fadeInUp">
+                                    <a href="/carrito" class="btn">Volver</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /FIN Resumen de totales -->
+
+                <div class="col-lg-8 col-md-12">
+
+                    <h4>Datos Personales</h4>
+                    <br>
+
+                    <form action="#!">
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label">
+                                    <b>Nombre</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Nombre" aria-label="Nombre">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">
+                                    <b>Apellido</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Apellido"
+                                        aria-label="Apellido">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="form-label">
+                                    <b>Correo Electronico</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" placeholder="Correo" aria-label="Correo">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label"><b>Numero de
+                                        Celular</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Numero de Celular"
+                                        aria-label="Numero de Celular">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4>Informacion de Pago</h4>
+                        <br>
+                        <label class="form-label">
+                            <b>Nombre del titular de la tarjeta</b>
+                        </label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Titular de la tarjeta"
+                                aria-label="Titular">
+                        </div>
+                        <label class="form-label">
+                            <b>Número de la tarjeta</b>
+                        </label>
+                        <div class="input-group mb-3">
+                            <input id="titular" type="number" class="form-control" placeholder="Número"
+                                aria-label="Titular">
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="form-label">
+                                    <b>Expiración</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" placeholder="Mes" aria-label="Mes">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">
+                                    <b>&nbsp</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Año" aria-label="Año">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">
+                                    <b>CCV</b>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" placeholder="***" aria-label="***">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button wow fadeInUp text-center">
+                            <button href="#!" class="btn">Pagar ahora</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        var element = document.getElementById('carrito');
+        element.classList.add('active');
+    </script>
+    <!-- /End Services Area -->
+    <%- include('../templates/footer') %>

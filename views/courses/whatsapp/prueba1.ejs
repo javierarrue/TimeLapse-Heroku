@@ -1,0 +1,299 @@
+<%- include('../templates/aside', {tituloWeb: '- Prueba 1' }) %>
+
+    <div class="col-sm-12 col-md-8 col-lg-9 col-12">
+        <div class="container mt-4">
+            <div class="col-12 mb-4">
+                <div class="text-center">
+                    <h2 class="wow fadeInUp" data-wow-delay=".2s">CURSO WHATSAPP</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".2s">No tengas miedo a aprendrer, sólo
+                        concéntrate y aprenderás! <i class="far fa-grin-beam"></i></p>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+
+                <hr class="w-50 mx-auto mb-5">
+
+                <div class="row">
+                    <div class="mb-5">
+                        <h5 class="wow fadeInUp mb-3" data-wow-delay=".1s">Esta es tu prueba número 1</h5>
+                        <p class="wow fadeInUp" data-wow-delay=".1s">Lorem ipsum dolor sit, amet consectetur
+                            adipisicing elit. Voluptas, dolore! Sequi magnam ab similique est eum alias quod
+                            nemo nulla, nam numquam excepturi pariatur ad sapiente modi.</p>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end wow fadeInUp" data-wow-delay=".1s">
+                        <form action="/rehacerProgreso/<%= name %> " method="post">
+                            <button type="submit" class="btn btn-sm"><small>Rehacer pruebas</small></button>
+                        </form>
+                    </div>
+                    <div class="col-4 text-center py-5 wow fadeInLeft border-dark border-right" data-wow-delay=".4s">
+                        <h1>Paso 1</h1>
+                        <% if (progress >= 1) { %>
+                            <img src="/images/tests/whatsapp/check.png" width="100px" height="100px" alt="">
+                        <% } else { %>
+                            <div class="button d-flex justify-content-center mt-3">
+                                <button class="btn-video" style="font-size: 12px;" data-bs-toggle="modal"
+                                    data-bs-target="#test1">Realizar</button>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="col-4 text-center py-5 wow fadeInDown" data-wow-delay=".4s">
+                        <h1>Paso 2</h1>
+                        <% if (progress >= 2) { %>
+                            <img src="/images/tests/whatsapp/check.png" width="100px" height="100px" alt="">
+                        <% } else if (progress >= 1) { %>
+                            <div class="button d-flex justify-content-center mt-3">
+                                <button id="xds" class="btn-video" style="font-size: 12px;" data-bs-toggle="modal"
+                                    data-bs-target="#test2">Realizar</button>
+                            </div>
+                        <% } else { %>
+                            <div class="button d-flex justify-content-center mt-3">
+                                <small style="font-size: 12px;">Completa el paso 1</small>
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="col-4 text-center py-5 wow fadeInRight border-dark border-left" data-wow-delay=".4s">
+                        <h1>Paso 3</h1>
+                        <% if (progress >= 3) { %>
+                            <img src="/images/tests/whatsapp/check.png" width="100px" height="100px" alt="">
+                        <% } else if (progress >= 2) { %>
+                            <div class="button d-flex justify-content-center mt-3">
+                                <button class="btn-video" style="font-size: 12px;" data-bs-toggle="modal"
+                                    data-bs-target="#test3">Realizar</button>
+                            </div>
+                        <% } else { %>
+                            <div class="button d-flex justify-content-center mt-3">
+                                <small style="font-size: 12px;">Completa el paso 2</small>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <div class="pagination center wow fadeInRigh mt-5" data-wow-delay=".1s">
+                        <ul class="pagination-list border">
+                            <li><a href="/curso/<%= name %>"><i class="fas fa-angle-left"></i></a></li>
+                            <li><a href="/curso/<%= name %>">1</a></li>
+                            <li class="active"><a href="/curso-p1/<%= name %>">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#"><i class="fas fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Modal Test 1 -->
+            <div class="modal fade" id="test1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-5">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-clos float-right" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-s-6 wow fadeInUp">
+                                    <div class="">
+                                        <img src="/images/products/logo-whatsapp.png" alt=""
+                                            style="width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-s-6">
+                                    <div class="mb-3 wow fadeInUp text-center" data-wow-delay=".1s">
+                                        <h3>Prueba número 1</h3>
+                                        <small>Clickea la opción que creas correcta, esto ayudará a registrar tu progreso, y además demostrará que sí estas avanzando. ¡Vamos!.</small>
+                                    </div>
+                                    <hr class="w-50 mx-auto">
+
+                                    <div class="text-center p-4 widget">
+                                        <h6 class="text-primary">¿Qué opción seleccionas para crear un contacto?</h6>
+                                        <i class="fas fa-long-arrow-alt-down mt-1 text-primary"></i>
+                                    </div>
+                                    <form action="/progresion/<%= name %>" method="POST">
+                                        <input type="hidden" value="1" name="progress">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p1_i1"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/1.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p1_i2"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/2.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" style="border-style: none;">
+                                                    <img id="p1_i3"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/3.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-12">
+                                                <small id="p1_res" class="d-flex justify-content-center font-weight-bold m-3"></small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal Test 1 -->
+
+            <!-- Start Modal Test 2 -->
+            <div class="modal fade" id="test2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-5">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-clos float-right" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-s-6 wow fadeInUp">
+                                    <div class="">
+                                        <img src="/images/products/logo-whatsapp.png" alt=""
+                                            style="width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-s-6">
+                                    <div class="mb-3 wow fadeInUp text-center" data-wow-delay=".1s">
+                                        <h3>Prueba número 2</h3>
+                                        <small>Clickea la opción que creas correcta, esto ayudará a registrar tu progreso, y además demostrará que sí estas avanzando. ¡Vamos!.</small>
+                                    </div>
+                                    <hr class="w-50 mx-auto">
+
+                                    <div class="text-center p-4 widget">
+                                        <h6 class="text-primary">¿Qué opción seleccionas para ingresar a ajustes?</h6>
+                                        <i class="fas fa-long-arrow-alt-down mt-1 text-primary"></i>
+                                    </div>
+                                    <form action="/progresion/<%= name %>" method="POST">
+                                        <input type="hidden" value="2" name="progress">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p2_i1"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/4.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" style="border-style: none;">
+                                                    <img id="p2_i2"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/5.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p2_i3"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/6.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-12">
+                                                <small id="p2_res" class="d-flex justify-content-center font-weight-bold m-3"></small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal Test 2 -->
+
+
+            <!-- Start Modal Test 3 -->
+            <div class="modal fade" id="test3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content p-5">
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-clos float-right" data-bs-dismiss="modal" aria-label="Close">X</button>
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-s-6 wow fadeInUp">
+                                    <div class="">
+                                        <img src="/images/products/logo-whatsapp.png" alt=""
+                                            style="width: 100%; height: 100%;">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-s-6">
+                                    <div class="mb-3 wow fadeInUp text-center" data-wow-delay=".1s">
+                                        <h3>Prueba número 3</h3>
+                                        <small>Clickea la opción que creas correcta, esto ayudará a registrar tu progreso, y además demostrará que sí estas avanzando. ¡Vamos!.</small>
+                                    </div>
+                                    <hr class="w-50 mx-auto">
+
+                                    <div class="text-center p-4 widget">
+                                        <h6 class="text-primary">¿Qué opción seleccionas para enviar una foto?</h6>
+                                        <i class="fas fa-long-arrow-alt-down mt-1 text-primary"></i>
+                                    </div>
+                                    <form action="/progresion/<%= name %>" method="POST">
+                                        <input type="hidden" value="3" name="progress">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p3_i1"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/7.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="button" style="border-style: none;">
+                                                    <img id="p3_i2"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/8.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button type="submit" style="border-style: none;">
+                                                    <img id="p3_i3"
+                                                    class=""
+                                                    src="/images/tests/whatsapp/9.jpeg"
+                                                    alt="imagen"
+                                                    width="100px" height="100px">
+                                                </button>
+                                            </div>
+                                            <div class="col-12">
+                                                <small id="p3_res" class="d-flex justify-content-center font-weight-bold m-3"></small>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal Test 3 -->
+
+        </div>
+    </div>
+
+    <%- include('../../templates/footer') %>
+    <script src="/js/personal-js/tests.js"></script>
+    <script>
+        const span = document.querySelectorAll('.part');
+        span[1].classList.add('text-primary','font-weight-bold');
+
+
+        
+    </script>

@@ -1,0 +1,123 @@
+<%- include('../templates/head', {tituloWeb: '- Tienda' }) %>
+
+    <!-- Start Service Area -->
+    <section class="services section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="section-title align-left" style="padding:0;">
+                        <span class=" wow fadeInDown" data-wow-delay=".2s">Tienda</span>
+                        <h2 class="wow fadeInUp text-wrap" data-wow-delay=".4s">Cursos
+                            Disponibles
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12" style="margin-top: 35px;">
+                    <div class="container-fluid">
+                        <div class="d-flex" style="float:right;">
+                            <form action="/tienda" method="GET" id="buscar">
+                                <input class="form-control me-2" id="buscador" type="search"
+                                    placeholder="Escriba el nombre del curso" aria-label="Search"
+                                    style="width : 400px; height : 10px" name="curso" value="<%= search.curso%>">
+                            </form>
+                            <button class="btn btn-outline-primary" id="btnBuscar" form="buscar" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- Herramientas de trabajo -->
+            <h2 class="wow fadeInUp text-center" data-wow-delay=".2s">Herramientas de trabajo</h2>
+
+            <br>
+
+
+            <div class="single-head">
+                <div class="row">
+                    <% if (cursos) { %>
+                        <% cursos.forEach(curso=> { %>
+                            <% if(curso.category == "ofimatica"){ %> 
+                            <div class="col-lg-3 col-md-6 col-12 mb-5">
+                                <div class="single-service wow fadeInUp" data-wow-delay=".2s">
+                                    <h5 class="text-center"><%= curso.name %></h5>
+                                    <input type="hidden" class="text-center" value="<%= curso.category %>"></input>
+                                    <input type="hidden" class="text-center" value="<%= curso.description %>"></input>
+                                    <div class="col text-center">
+                                        <a href="/tienda/<%= curso.name %> ">
+                                            <img src="images/products/<%= curso.logo %>" alt="#" height="200px"
+                                                width="200px">
+                                        </a>
+                                    </div>
+                                    <p class="text-center"><%= curso.price %></p>
+                                    <br>
+                                    <div class="button text-center">
+                                        <a class="btn btn-add" onclick="M.toast({html: '<%= curso.name %> añadido'})">Añadir a carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %> 
+                        <% }) %>
+                    <% } %>
+                </div>
+
+            </div>
+
+
+            <hr>
+            <!-- Redes sociales -->
+
+            <h2 class="wow fadeInUp text-center" data-wow-delay=".2s">Redes Sociales</h2>
+
+            <br>
+            <div class="single-head">
+                <img class="service-patern wow fadeInLeft" data-wow-delay=".5s" src="images/service/service-patern.png"
+                    alt="#">
+                <div class="row">
+                    <% if (cursos) { %>
+                        <% cursos.forEach(curso=> { %>
+                            <% if(curso.category == "redes sociales"){ %> 
+                            <div class="col-lg-3 col-md-6 col-12 mb-5">
+                                <div class="single-service wow fadeInUp" data-wow-delay=".2s">
+                                    <h5 class="text-center"><%= curso.name %></h5>
+                                    <input type="hidden" class="text-center" value="<%= curso.category %>"></input>
+                                    <input type="hidden" class="text-center" value="<%= curso.description %>"></input>
+                                    <div class="col text-center">
+                                        <a href="/tienda/<%= curso.name %>">
+                                            <img src="images/products/<%= curso.logo %>" alt="#" height="200px"
+                                                width="200px">
+                                        </a>
+                                    </div>
+                                    <p class="text-center"><%= curso.price %></p>
+                                    <br>
+                                    <div class="button text-center">
+                                        <a class="btn btn-add" onclick="M.toast({html: '<%= curso.name %> añadido'})">Añadir a carrito</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                            <% }) %>
+                         <% } %>
+                </div>
+            </div>
+
+
+            <!-- Start cart -->
+            <div aria-hidden="true" style="display: none;">
+                <div class="col-lg-4 col-md-4">
+                    <div id="items" class="wow fadeInDown" data-wow-delay=".4s">
+                    </div>
+                    <div id="toPay" class="wow fadeInDown" data-wow-delay=".4s"></div>
+                </div>
+            </div>
+            <!-- End cart -->
+
+        </div>
+    </section>
+    <!-- /End Services Area -->
+    <script>
+        var element = document.getElementById('tienda');
+        element.classList.add('active');
+    </script>
+
+    <%- include('../templates/footer') %>
